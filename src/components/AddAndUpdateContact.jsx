@@ -55,7 +55,7 @@ const AddAndUpdateContact = ({ isOpen, onClose, isUpdate, contact }) => {
         >
           <Form className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">Name </label>
               <Field name="name" className="h-10 border" />
               <div className=" text-xs text-red-500">
                 <ErrorMessage name="name" />
