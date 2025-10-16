@@ -1,9 +1,17 @@
 const Navbar = () => {
   return (
-    <div className="my-4 flex h-[60px] items-center justify-center gap-2 rounded-lg bg-white text-xl font-medium">
-      <img src="/firebase.svg" />
-      <h1>Controle - Automação</h1>
+    <div className="my-4 flex h-[60px] items-center justify-center gap-8 rounded-lg bg-blue-100 text-xl font-bold">
+      <img src="../public/aut.png" width={60} height={50} />
+      <div className="grid justify-between">
+      <h1 className="font-medium">Controle de Estoque</h1>
+      <h2>Automação</h2>
+   
+      </div>
+       
     </div>
+
+
+    
   );
 };
 

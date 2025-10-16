@@ -4,7 +4,7 @@ const NotFoundContact = () => {
       <div>
         <img src="/contact.png" />
       </div>
-      <h3 className="text-2xl font-semibold text-white"> Contact Not Found</h3>
+      <h3 className="text-2xl font-semibold text-white"> Material não encontrado</h3>
     </div>
   );
 };

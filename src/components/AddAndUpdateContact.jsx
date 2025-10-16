@@ -5,34 +5,39 @@ import { db } from "../config/firebase";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 
+
 const contactSchemaValidation = Yup.object().shape({
-  name: Yup.string().required("Name is Required"),
-  email: Yup.string().email("Invalid Email").required("Email is Required"),
+  Nome: Yup.string().required("Nome é obrigatório"),
+  Codigo: Yup.number().required("Código é obrigatório").typeError('O valor deve ser numerico.'),
+  Quantidade: Yup.number().required("Quantidade é obrigatório").typeError('O valor deve ser numerico.'),
 });
 
 const AddAndUpdateContact = ({ isOpen, onClose, isUpdate, contact }) => {
   const addContact = async (contact) => {
     try {
-      const contactRef = collection(db, "contacts");
+      const contactRef = collection(db, "material");
       await addDoc(contactRef, contact);
       onClose();
-      toast.success("Contact Added Successfully");
+      toast.success("Material adicionado com sucesso");
     } catch (error) {
       console.log(error);
     }
   };
   const updateContact = async (contact, id) => {
     try {
-      const contactRef = doc(db, "contacts", id);
+      const contactRef = doc(db, "material", id);
       await updateDoc(contactRef, contact);
       onClose();
-      toast.success("Contact Updated Successfully");
+      toast.success("Material atualizado com sucesso");
     } catch (error) {
       console.log(error);
     }
   };
 
+
   return (
+
+    
     <div>
       <Modal isOpen={isOpen} onClose={onClose}>
         <Formik
@@ -40,12 +45,14 @@ const AddAndUpdateContact = ({ isOpen, onClose, isUpdate, contact }) => {
           initialValues={
             isUpdate
               ? {
-                  name: contact.name,
-                  email: contact.email,
+                  Nome: contact.Nome,
+                  Codigo: contact.Codigo,
+                  Quantidade: contact.Quantidade
                 }
               : {
-                  name: "",
-                  email: "",
+                  Nome: "",
+                  Codigo: "",
+                  Quantidade: ""
                 }
           }
           onSubmit={(values) => {
@@ -55,22 +62,31 @@ const AddAndUpdateContact = ({ isOpen, onClose, isUpdate, contact }) => {
         >
           <Form className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
-              <label htmlFor="name">Name </label>
-              <Field name="name" className="h-10 border" />
+              <label htmlFor="Nome">Nome </label>
+              <Field name="Nome" disabled={isUpdate} className="db h-10 border" />
               <div className=" text-xs text-red-500">
-                <ErrorMessage name="name" />
+                <ErrorMessage name="Nome" />
               </div>
             </div>
             <div className="flex flex-col gap-1">
-              <label htmlFor="email">Email</label>
-              <Field name="email" className="h-10 border" />
+              <label htmlFor="Codigo">Código</label>
+              <Field name="Codigo" disabled={isUpdate} className="db h-10 border" />
               <div className=" text-xs text-red-500">
-                <ErrorMessage name="email" />
+                <ErrorMessage name="Codigo" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="Quantidade">Quantidade</label>
+              <Field name="Quantidade" className="h-10 border" />
+              <div className=" text-xs text-red-500">
+                <ErrorMessage name="Quantidade" />
               </div>
             </div>
 
+
+
             <button className="self-end border bg-orange px-3 py-1.5">
-              {isUpdate ? "update" : "add"} contact
+              {isUpdate ? "Atualizar" : "Adicionar"} Material
             </button>
           </Form>
         </Formik>

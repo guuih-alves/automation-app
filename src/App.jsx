@@ -19,7 +19,7 @@ const App = () => {
   useEffect(() => {
     const getContacts = async () => {
       try {
-        const contactsRef = collection(db, "contacts");
+        const contactsRef = collection(db, "material");
 
         onSnapshot(contactsRef, (snapshot) => {
           const contactLists = snapshot.docs.map((doc) => {
@@ -42,7 +42,7 @@ const App = () => {
   const filterContacts = (e) => {
     const value = e.target.value;
 
-    const contactsRef = collection(db, "contacts");
+    const contactsRef = collection(db, "material");
 
     onSnapshot(contactsRef, (snapshot) => {
       const contactLists = snapshot.docs.map((doc) => {
@@ -53,7 +53,7 @@ const App = () => {
       });
 
       const filteredContacts = contactLists.filter((contact) =>
-        contact.name.toLowerCase().includes(value.toLowerCase())
+        contact.Nome.toLowerCase().includes(value.toLowerCase())
       );
 
       setContacts(filteredContacts);
@@ -73,8 +73,11 @@ const App = () => {
               onChange={filterContacts}
               type="text"
               className=" h-10 flex-grow rounded-md border border-white bg-transparent pl-9 text-white"
+              
             />
+             
           </div>
+           
 
           <AiFillPlusCircle
             onClick={onOpen}
@@ -90,11 +93,15 @@ const App = () => {
             ))
           )}
         </div>
+             <p className="items-center">Desenvolvido por: Guilherme O Alves</p>
       </div>
+     
       <ToastContainer position="bottom-center" />
       <AddAndUpdateContact onClose={onClose} isOpen={isOpen} />
     </>
   );
 };
+
+
 
 export default App;
