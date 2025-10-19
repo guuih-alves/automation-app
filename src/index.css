@@ -12,3 +12,7 @@ body {
 .db:disabled {
  background-color:rgb(159, 194, 178)
 }
+
+.qt {
+  background-color: tomato;
+}

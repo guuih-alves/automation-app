@@ -8,6 +8,9 @@ import useDisclouse from "../hooks/useDisclouse";
 import { toast } from "react-toastify";
 import { RxUpdate } from "react-icons/rx";
 import { FaTools } from "react-icons/fa";
+import Swal from "sweetalert2";
+
+
 
 
 const ContactCard = ({ contact }) => {
@@ -22,6 +25,27 @@ const ContactCard = ({ contact }) => {
     }
   };
 
+  const prevdelete = () => {
+    Swal.fire({
+      width: 350,
+  title: "Voce tem certeza?",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Excluir"
+}).then((result) => {
+  if (result.isConfirmed) {
+    deleteContact(contact.id);
+    Swal.fire({
+      title: "Deletado!",
+      text: "Seu arquivo foi deletado.",
+      icon: "success"
+    });
+  }
+});
+  }
+
   return (
     <>
       <div
@@ -33,14 +57,21 @@ const ContactCard = ({ contact }) => {
           <div className="ml-5">
             <h2 className="font-medium">{contact.Nome}</h2>
             <p className="text-sm">Código: {contact.Codigo}</p>
-            <p className="text-sm">Quantidade: {contact.Quantidade}</p>
+
+          {contact.Quantidade <= 2 ? (
+             <p className="text-sm qt">Quantidade: {contact.Quantidade}</p>
+          ) : (   
+              <p className="text-sm ">Quantidade: {contact.Quantidade}</p>
+          )}
+
+
             
           </div>
         </div>
         <div className="flex text-3xl">
-          <RxUpdate onClick={onOpen} className="cursor-pointer" />
+          <RxUpdate  onClick={onOpen} className="cursor-pointer" />
           <IoMdTrash
-            onClick={() => deleteContact(contact.id)}
+            onClick={() => prevdelete(contact.id)}
             className="cursor-pointer text-orange"
           />
         </div>
@@ -51,9 +82,13 @@ const ContactCard = ({ contact }) => {
         isOpen={isOpen}
         onClose={onClose}
       />
+     
     </>
+
   );
 };
+
+
 
 
 
