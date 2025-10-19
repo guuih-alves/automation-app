@@ -93,7 +93,7 @@ const App = () => {
             ))
           )}
         </div>
-             <p className="items-center">Desenvolvido por: Guilherme O Alves</p>
+             <p className="items-center text-white bg-gray-600">Desenvolvido por: Guilherme O Alves</p>
       </div>
      
       <ToastContainer position="bottom-center" />
